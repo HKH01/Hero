@@ -39,7 +39,7 @@ extension HeroTransition:UIViewControllerTransitioningDelegate {
   public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     guard !isTransitioning else { return nil }
     self.state = .notified
-    self.isPresenting = false
+    self.isPresenting = isReplacing
     self.fromViewController = fromViewController ?? dismissed
     return self
   }

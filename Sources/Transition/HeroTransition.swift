@@ -61,6 +61,7 @@ open class HeroTransition: NSObject {
 
   public var isTransitioning: Bool { return state != .possible }
   public internal(set) var isPresenting: Bool = true
+  public internal(set) var isReplacing: Bool = false
 
   @available(*, deprecated, message: "Use isTransitioning instead")
   public var transitioning: Bool {

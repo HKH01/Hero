@@ -35,6 +35,7 @@ extension HeroTransition {
       inNavigationController = false
       inTabBarController = false
       forceNotInteractive = false
+      isReplacing = false
       animatingToViews.removeAll()
       animatingFromViews.removeAll()
       progressUpdateObservers = nil

@@ -247,6 +247,7 @@ extension UIViewController {
       print("hero_replaceViewController cancelled because Hero was doing a transition. Use Hero.shared.cancel(animated:false) or Hero.shared.end(animated:false) to stop the transition first before calling hero_replaceViewController.")
       return
     }
+    hero.isReplacing = true
     if let navigationController = navigationController {
       var vcs = navigationController.childViewControllers
       if !vcs.isEmpty {
@@ -259,8 +260,14 @@ extension UIViewController {
       navigationController.setViewControllers(vcs, animated: true)
     } else if let parentVC = presentingViewController {
       hero.toViewController = next
+      let snapshot = next.view.snapshotView()
+      if let snapshot = snapshot {
+        parentVC.view.addSubview(snapshot)
+      }
       parentVC.dismiss(animated: true) {
-        parentVC.present(next, animated: false, completion: nil)
+        parentVC.present(next, animated: false) {
+          snapshot?.removeFromSuperview()
+        }
       }
     } else if let window = view.window {
       window.addSubview(next.view)
